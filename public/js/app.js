@@ -12111,14 +12111,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'VueLivrosList',
-	props: ['livros'],
+	props: ['livros', 'destroy', 'edit'],
 	data: function data() {
 		return {
 			filter: "",
-			books: JSON.parse(this.livros)
+			books: JSON.parse(this.livros),
+			rota_destroy: this.destroy.toString(),
+			rota_edit: this.edit.toString()
 		};
 	},
 
@@ -12133,10 +12139,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		edita: function edita(id) {
-			window.location.href = '/livro/' + id + '/edit';
-		}
+		editar: function editar(id) {
+			var self = this;
+			var rota = this.rota_edit.replace('%id', id);
+			window.location.href = rota;
+		},
+		deletar: function deletar(id) {
+			var self = this;
+			var rota = this.rota_destroy.replace('%id', id);
 
+			axios.delete(rota).then(function (response) {
+				window.location.href = response.data;
+			});
+		}
 	}
 });
 
@@ -12189,11 +12204,27 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: {
                     click: function($event) {
-                      _vm.edita(livro.id)
+                      _vm.editar(livro.id)
                     }
                   }
                 },
                 [_vm._v(" Editar ")]
+              ),
+              _vm._v(" "),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.deletar(livro.id)
+                    }
+                  }
+                },
+                [_vm._v(" Deletar ")]
               )
             ])
           ])
@@ -47884,10 +47915,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'VueLivrosEdit',
@@ -47907,7 +47934,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", _vm._b({}, "div", _vm.livro, false), [
+  return _c("div", [
     _c("div", { staticClass: "form-group row" }, [
       _c(
         "label",
@@ -48020,29 +48047,7 @@ var render = function() {
             }
           }
         })
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.livro.id,
-            expression: "livro.id"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "hidden", value: "", name: "id" },
-        domProps: { value: _vm.livro.id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.livro, "id", $event.target.value)
-          }
-        }
-      })
+      ])
     ])
   ])
 }

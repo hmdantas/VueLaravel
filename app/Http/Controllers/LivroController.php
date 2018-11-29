@@ -98,8 +98,12 @@ class LivroController extends Controller
      * @param  \App\Models\Livro  $livro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Livro $livro)
+    public function destroy($id)
     {
-        //
+        $livro = Livro::find($id);
+
+        $livro->delete();
+
+        return route('livro.index');
     }
 }

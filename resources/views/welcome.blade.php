@@ -67,9 +67,9 @@
         <br>
         <div class="container">
             <div id="app">
-                <vue-livros-list livros="{{$livro}}"></vue-livros-list>
+                <vue-livros-list edit="{{route('livro.edit','%id')}}" destroy="{{route('livro.destroy','%id')}}" livros="{{$livro}}"></vue-livros-list>
             </div>   
-            <a href="{{action('LivroController@create')}}">Criar um livro!</a>   
+            <a href="{{route('livro.create')}}">Criar um livro!</a>   
         </div> 
     </body>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

@@ -16,7 +16,11 @@
 		    <td>{{livro.titulo}}</td>
 		    <td>{{livro.autor}}</td>
 		    <td>{{livro.resumo}}</td>
-            <td> <button v-on:click="edita(livro.id)" class="btn btn-primary"> Editar </button> </td>
+            <td> 
+                <button v-on:click="editar(livro.id)" class="btn btn-primary"> Editar </button> 
+                <br><br>
+                <button v-on:click="deletar(livro.id)" class="btn btn-primary"> Deletar </button>
+            </td>
 		  </tr>
 		</tbody>
 		</table>
@@ -27,11 +31,13 @@
 <script>
     export default {
     	name: 'VueLivrosList',
-    	props: ['livros'],
+    	props: ['livros','destroy','edit'],
     	data() {
     		return {
     			filter:"",
     			books: JSON.parse(this.livros),
+                rota_destroy: this.destroy.toString(),
+                rota_edit: this.edit.toString(),
     		}
     	},
     	computed: {
@@ -45,10 +51,19 @@
     		}
     	},
         methods: {
-            edita: function(id) {
-                window.location.href = '/livro/' + id + '/edit';
-            }
+            editar: function(id) {
+                var self = this;
+                var rota = this.rota_edit.replace('%id',id);
+                window.location.href = rota;
+            },
+            deletar: function(id) {
+                var self = this;
+                var rota = this.rota_destroy.replace('%id',id);
 
+                axios.delete(rota).then(response => {
+                    window.location.href = response.data;
+                });                
+            },
         }
     }
 </script>

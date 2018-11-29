@@ -141,11 +141,27 @@ var render = function() {
                   staticClass: "btn btn-primary",
                   on: {
                     click: function($event) {
-                      _vm.edita(livro.id)
+                      _vm.editar(livro.id)
                     }
                   }
                 },
                 [_vm._v(" Editar ")]
+              ),
+              _vm._v(" "),
+              _c("br"),
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      _vm.deletar(livro.id)
+                    }
+                  }
+                },
+                [_vm._v(" Deletar ")]
               )
             ])
           ])
@@ -11825,14 +11841,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'VueLivrosList',
-	props: ['livros'],
+	props: ['livros', 'destroy', 'edit'],
 	data: function data() {
 		return {
 			filter: "",
-			books: JSON.parse(this.livros)
+			books: JSON.parse(this.livros),
+			rota_destroy: this.destroy.toString(),
+			rota_edit: this.edit.toString()
 		};
 	},
 
@@ -11847,10 +11869,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		edita: function edita(id) {
-			window.location.href = '/livro/' + id + '/edit';
-		}
+		editar: function editar(id) {
+			var self = this;
+			var rota = this.rota_edit.replace('%id', id);
+			window.location.href = rota;
+		},
+		deletar: function deletar(id) {
+			var self = this;
+			var rota = this.rota_destroy.replace('%id', id);
 
+			axios.delete(rota).then(function (response) {
+				window.location.href = response.data;
+			});
+		}
 	}
 });
 
