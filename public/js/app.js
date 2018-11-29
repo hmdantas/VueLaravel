@@ -47740,7 +47740,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'VueLivrosCreate'
+  name: 'VueLivrosCreate',
+  props: ['rota'],
+  data: function data() {
+    return {
+      livro: {
+        titulo: "",
+        autor: "",
+        resumo: ""
+      },
+      rota_create: this.rota.toString()
+    };
+  },
+
+  methods: {
+    cria: function cria() {
+      axios.post(this.rota_create, this.livro).then(function (response) {
+        window.location.href = response.data;
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -47751,85 +47772,142 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-2 col-form-label",
-            attrs: { for: "example-text-input" }
-          },
-          [_vm._v("Título")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              value: "",
-              placeholder: "Título",
-              name: "titulo"
-            }
-          })
-        ])
-      ]),
+  return _c("div", [
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-2 col-form-label",
+          attrs: { for: "example-text-input" }
+        },
+        [_vm._v("Título")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-2 col-form-label",
-            attrs: { for: "example-text-input" }
-          },
-          [_vm._v("Autor")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              value: "",
-              placeholder: "Autor",
-              name: "autor"
+      _c("div", { staticClass: "col-10" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.livro.titulo,
+              expression: "livro.titulo"
             }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "label",
-          {
-            staticClass: "col-2 col-form-label",
-            attrs: { for: "example-text-input" }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            value: "",
+            placeholder: "Título",
+            name: "titulo"
           },
-          [_vm._v("Resumo")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-10" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              value: "",
-              placeholder: "Resumo",
-              name: "resumo"
+          domProps: { value: _vm.livro.titulo },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.livro, "titulo", $event.target.value)
             }
-          })
-        ])
+          }
+        })
       ])
-    ])
-  }
-]
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-2 col-form-label",
+          attrs: { for: "example-text-input" }
+        },
+        [_vm._v("Autor")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-10" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.livro.autor,
+              expression: "livro.autor"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            value: "",
+            placeholder: "Autor",
+            name: "autor"
+          },
+          domProps: { value: _vm.livro.autor },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.livro, "autor", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-2 col-form-label",
+          attrs: { for: "example-text-input" }
+        },
+        [_vm._v("Resumo")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-10" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.livro.resumo,
+              expression: "livro.resumo"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            value: "",
+            placeholder: "Resumo",
+            name: "resumo"
+          },
+          domProps: { value: _vm.livro.resumo },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.livro, "resumo", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "submit" },
+        on: { click: _vm.cria }
+      },
+      [_vm._v("Adicionar")]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

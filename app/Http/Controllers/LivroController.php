@@ -43,15 +43,16 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        $livro = new Livro();
-        
-        $livro->titulo = $request->titulo;
-        $livro->autor = $request->autor;
-        $livro->resumo = $request->resumo;
 
-        $livro->save();
+        $novolivro = new Livro();
 
-        return view('welcome', ['livro' => Livro::all()]);
+        $novolivro->titulo = $request->titulo;
+        $novolivro->autor = $request->autor;
+        $novolivro->resumo = $request->resumo;
+
+        $novolivro->save();
+
+        return route('livro.index');
     }
 
     /**
