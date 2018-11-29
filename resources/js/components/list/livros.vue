@@ -1,7 +1,7 @@
 <template>
     <div>
     	<input v-model='filter'></input>
-
+        <br><br>
 		<table class="table">
 		<thead>
 		  <tr>
