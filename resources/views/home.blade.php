@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+
+                    <br>
+
+                    <a href="{{route('livro.index')}}">Ver a lista de livros!</a>   
                 </div>
             </div>
         </div>

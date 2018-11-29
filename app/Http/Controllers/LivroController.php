@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livro;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller
@@ -14,7 +15,12 @@ class LivroController extends Controller
      */
     public function index()
     {
-        return view('welcome',['livro' => Livro::all()]);
+        if (Auth::check()) {
+            return view('welcome',['livro' => Livro::all()]);
+        }
+
+        return redirect('/login');
+        
     }
 
     /**
