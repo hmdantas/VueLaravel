@@ -20,19 +20,37 @@
                 <input class="form-control" type="text" value="" placeholder="Resumo" v-model="livro.resumo" name="resumo"> 
             </div>
         </div>
+        <br><br>
+        <button v-on:click="edita" type="submit" class="btn btn-primary">Salvar</button>
 
     </div>
 </template>
 
 <script>
 export default {
-   name: 'VueLivrosEdit',
-   props: ['book'],
-   data() {
+ name: 'VueLivrosEdit',
+ props: ['book','rota'],
+ data() {
     return {
       livro: JSON.parse(this.book),
+      rota_edit: this.rota.toString()
+  }
+},
+methods: {
+    edita: function(){
+        var rota_id = this.rota_edit.replace('%id',this.livro.id);
+        axios.put(rota_id, this.livro)
+      .then(
+        function(response){
+          window.location.href = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+
   }
 }
+
 }
 
 </script>

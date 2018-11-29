@@ -29,10 +29,8 @@ class LivroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $livro = new Livro();
-        
-        return view('create',compact('livro'));
+    {       
+        return view('create');
     }
 
     /**
@@ -96,7 +94,7 @@ class LivroController extends Controller
 
         $livro->update();
 
-        return redirect('livro');
+        return route('livro.index');
     }
 
     /**

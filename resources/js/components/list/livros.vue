@@ -24,20 +24,22 @@
 		  </tr>
 		</tbody>
 		</table>
-
+        <br><br>
+        <button v-on:click="criar" class="btn btn-primary"> Inserir um livro </button>
     </div>
 </template>
 
 <script>
     export default {
     	name: 'VueLivrosList',
-    	props: ['livros','destroy','edit'],
+    	props: ['livros','destroy','edit','create'],
     	data() {
     		return {
     			filter:"",
     			books: JSON.parse(this.livros),
                 rota_destroy: this.destroy.toString(),
                 rota_edit: this.edit.toString(),
+                rota_create: this.create.toString(),
     		}
     	},
     	computed: {
@@ -64,6 +66,9 @@
                     window.location.href = response.data;
                 });                
             },
+            criar: function() {
+                window.location.href = this.rota_create;
+            }
         }
     }
 </script>

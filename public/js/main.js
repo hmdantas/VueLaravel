@@ -170,6 +170,13 @@ var render = function() {
           ])
         })
       )
+    ]),
+    _vm._v(" "),
+    _c("br"),
+    _c("br"),
+    _vm._v(" "),
+    _c("button", { staticClass: "btn btn-primary", on: { click: _vm.criar } }, [
+      _vm._v(" Inserir um livro ")
     ])
   ])
 }
@@ -11848,44 +11855,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	name: 'VueLivrosList',
-	props: ['livros', 'destroy', 'edit'],
-	data: function data() {
-		return {
-			filter: "",
-			books: JSON.parse(this.livros),
-			rota_destroy: this.destroy.toString(),
-			rota_edit: this.edit.toString()
-		};
-	},
+    name: 'VueLivrosList',
+    props: ['livros', 'destroy', 'edit', 'create'],
+    data: function data() {
+        return {
+            filter: "",
+            books: JSON.parse(this.livros),
+            rota_destroy: this.destroy.toString(),
+            rota_edit: this.edit.toString(),
+            rota_create: this.create.toString()
+        };
+    },
 
-	computed: {
-		filterBooks: function filterBooks() {
-			var self = this;
-			return _.orderBy(self.books.filter(function (livro) {
-				var searchRegex = new RegExp(self.filter, 'i');
+    computed: {
+        filterBooks: function filterBooks() {
+            var self = this;
+            return _.orderBy(self.books.filter(function (livro) {
+                var searchRegex = new RegExp(self.filter, 'i');
 
-				return searchRegex.test(livro.titulo);
-			}));
-		}
-	},
-	methods: {
-		editar: function editar(id) {
-			var self = this;
-			var rota = this.rota_edit.replace('%id', id);
-			window.location.href = rota;
-		},
-		deletar: function deletar(id) {
-			var self = this;
-			var rota = this.rota_destroy.replace('%id', id);
+                return searchRegex.test(livro.titulo);
+            }));
+        }
+    },
+    methods: {
+        editar: function editar(id) {
+            var self = this;
+            var rota = this.rota_edit.replace('%id', id);
+            window.location.href = rota;
+        },
+        deletar: function deletar(id) {
+            var self = this;
+            var rota = this.rota_destroy.replace('%id', id);
 
-			axios.delete(rota).then(function (response) {
-				window.location.href = response.data;
-			});
-		}
-	}
+            axios.delete(rota).then(function (response) {
+                window.location.href = response.data;
+            });
+        },
+        criar: function criar() {
+            window.location.href = this.rota_create;
+        }
+    }
 });
 
 /***/ })
