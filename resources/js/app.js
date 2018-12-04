@@ -38,3 +38,5 @@ Vue.component('vue-livros-edit', require('./components/list/edit.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+$(".dropdown-trigger").dropdown();

@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="row">
+        <label>Filtrar por Título:</label>
     	<input v-model='filter'></input>
         <br><br>
 		<table class="table">
@@ -26,6 +27,7 @@
 		</table>
         <br><br>
         <button v-on:click="criar" class="btn btn-primary"> Inserir um livro </button>
+<!--         <br><br> -->
     </div>
 </template>
 
